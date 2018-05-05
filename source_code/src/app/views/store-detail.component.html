@@ -1,0 +1,17 @@
+<div class="wrap-store-detail">
+    <div class="store-detail-img">
+        <img [src]="store.image != null ? store.image : './assets/img/store-bg-default.png'" />
+    </div>
+    <div class="store-detail-content">
+        <h2>{{store.name}}</h2>
+        <p>営業時間 {{store.open_at}} {{store.close_at}} {{store.time_note}}</p>
+        <p>{{store.address}}</p>
+        <p class="phone">
+            <a href="tel:+{{store.phone}}">{{store.phone}}</a>
+        </p>
+        <p>{{store.comment}}</p>
+        <div class="wrap-btn-map">
+            <a class="feedback" [routerLink]="['/store-map']">地図で確認する</a>
+        </div>
+    </div>
+</div>

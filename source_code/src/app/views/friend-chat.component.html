@@ -1,0 +1,37 @@
+<div #scrollMe class="wrap-friend-chat scrolled" [style.height]="this.getData('scollerH') + 'px'">
+    <ul class="message-list">
+        <li class="text message-item" *ngFor="let item of messages | async"
+            [class]="item.from == userProfile.id ? 'message-item me' : 'message-item friend'"
+            (click)="updateMessage(item)">
+            <div class="message-avatar" *ngIf="item.from == userProfile.id">
+                <img *ngIf="userProfile.avatar" [src]="userProfile.avatar" />
+                <img *ngIf="!userProfile.avatar" [src]="'./assets/img/avatar.png'" />
+            </div>
+            <div class="wrap-message-content" [style.width]="this.getData('messageW') + 'px'">
+                <div class="message-content">
+                    <div class="message-text scrollbar-hidden" [innerHTML]>
+                      {{item.message }}
+                    </div>
+                    <span class="message-time">
+                        {{item.time | date: 'MM/dd H:m:s'}}
+                    </span>
+                </div>
+            </div>
+            <div class="message-avatar" *ngIf="item.from == friendProfile.id">
+                <img *ngIf="friendProfile.image" [src]="friendProfile.image" />
+                <img *ngIf="!friendProfile.image" [src]="'./assets/img/avatar.png'" />
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="box-chat">
+    <form [formGroup]="chatForm" (submit)="sendMessage()">
+
+        <div class="wrap-input-mess">
+            <textarea id="content" formControlName="content" required placeholder="メッセージを入力してください。"></textarea>
+        </div>
+        <div class="wrap-action-mess">
+            <button type="submit" class="ignore_click feedback" [disabled]="!chatForm.valid" id="chat_submit">送信</button>
+        </div>
+    </form>
+</div>

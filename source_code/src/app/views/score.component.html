@@ -1,0 +1,79 @@
+<div class="wrap-score-top">
+    <div class="wrap-header-view" #subHeaderView>
+        <div class="wrap-link-add">
+            <div class="btn-start-game" (click)="openDialog()">
+                <button class="feedback">ゲームを始める</button>
+            </div>
+        </div>
+        <div class="tab three">
+            <ul>
+                <li class="feedback">
+                    <a [class]="searchType == 'daily' ? 'active' : ''" (click)="gotoPage('/score/daily')">日別</a>
+                </li>
+                <li class="feedback">
+                    <a [class]="searchType == 'weekly' ? 'active' : ''" (click)="gotoPage('/score/weekly')">週別</a>
+                </li>
+                <li class="feedback">
+                    <a [class]="searchType == 'monthly' ? 'active' : ''" (click)="gotoPage('/score/monthly')">月別</a>
+                </li>
+            </ul>
+        </div>
+        <div class="list-data-header">
+            <div>日付</div>
+            <div>ゲーム数</div>
+            <div>AVG</div>
+            <div>H/G</div>
+        </div>
+    </div>
+
+    <div
+        class="scrolled list-data-body"
+        [style.height]="listHeight + 'px'"
+        infiniteScroll
+        [infiniteScrollDistance]="scroller.infiniteScrollDistance"
+        [infiniteScrollThrottle]="scroller.infiniteScrollThrottle"
+        (scrolled)="onScrollDown()"
+        (scrolledUp)="onScrollUp()"
+        [scrollWindow]="scroller.scrollWindow"
+    >
+        <div *ngIf="items?.length > 0" class="">
+            <div class="list-data" *ngFor="let item of items" (click)="gotoDetail(item)">
+                <div *ngIf="searchType != 'monthly'">{{item.timing | date: 'MM/dd'}}</div>
+                <div *ngIf="searchType == 'monthly'">{{item.timing | date: 'MM'}}月</div>
+                <div>{{item.game_no}}</div>
+                <div>{{item.average}}</div>
+                <div>{{item.highest}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wrap-modal-dialog" [ngClass]="{disabled: dialogDisabled}">
+    <div class="modal-dialog">
+        <form *ngIf="showForm" [formGroup]="clubChoiseForm" (submit)="startGame()">
+            <div class="dialog-content center">
+                <br />
+                <p>店舗を選んでください</p>
+                <br />
+                <select class="select" id="club" formControlName="club" #item (change)="changeClub(item.value)" required>
+                    <option value="">--Select--</option>
+                    <option *ngFor="let item of clubs" [value]="item.id">
+                        {{item.name}}
+                    </option>
+                </select>
+                <br />
+                <br />
+            </div>
+            <div class="dialog-button">
+                <button class="dialog-btn-choise-club" type="button" (click)="choiseClub()">
+                    選択
+                </button>
+                <button class="dialog-btn-cancel" type="button" (click)="closeDialog()">
+                    キャンセル
+                </button>
+                <button *ngIf="this.getData('canAddClub')" class="dialog-btn-regist-club" type="button" (click)="registerClub()">
+                    登録店舗を追加
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

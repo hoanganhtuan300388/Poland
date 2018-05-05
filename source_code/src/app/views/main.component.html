@@ -1,0 +1,82 @@
+<div id="container" class="page" [ngClass]="componentClass" (click)="triggerDocumentClick($event)">
+    <div id="header" [style.height]="headerHeight + 'px'">
+       <div class="left-sidebar"   [ngClass]="[mainService.leftSidebar == '戻る' ? 'bt-back-left' : '', !mainService.leftSidebar ? 'disabled' : '']">
+        <!-- <div class="left-sidebar" [ngClass]="{disabled: !mainService.leftSidebar}"> -->
+            <a href="javascript:void(0)" (click)="onClickLeftSideBar()" [ngClass]="[mainService.leftSidebar == '戻る' ? 'feedback' : ' feedback-scale']">
+                {{mainService.leftSidebar}}
+            </a>
+        </div>
+        <div class="title" [ngClass]="(isHidden == true || nickname == '') ? 'title-setting' : ''">
+            <p class="title-top">{{mainService.title}}</p>
+            <p class="user-header" *ngIf="(isHidden == false && nickname != '')">{{ nickname }} さん　スキルレベル <span>{{ level }}</span></p>
+        </div>
+        <div class="right-sidebar" *ngIf="mainService.rightSidebar && mainService.rightSidebar != ''">
+            <div class="right-sidebar-content active" *ngIf="mainService.rightState == 'active' && mainService.rightSidebar != '探す'">
+                <a href="javascript:void(0)" (click)="onClickRightSideBar()" class="feedback-scale" >
+                    {{mainService.rightSidebar}}
+                </a>
+            </div>
+            <div class="right-sidebar-content inactive" *ngIf="mainService.rightState != 'active' && mainService.rightSidebar != '探す'">
+                {{mainService.rightSidebar}}
+            </div>
+            <div class="right-sidebar-content" *ngIf="mainService.rightSidebar == '探す'">
+                <a class="add-friend-bt feedback-scale" href="javascript:void(0)" (click)="onClickRightSideBar()">
+                    <img [src]="'./assets/img/add_friend_bt.png'" />
+                </a>
+            </div>
+        </div>
+    </div>
+    <div id="main" [ngClass]="{'not-display-nav': !mainService.displayNav}" [style.padding-bottom]="paddingFooterHeight + 'px'">
+        <div id="content" [style.height]="mainHeight + 'px'">
+            <router-outlet></router-outlet>
+        </div>
+        <div id="advertising" [style.height]="mainService.advertising ? advHeight + 'px' : '0px'">
+            <app-advertising-view [isLoadData]="mainService.advertising" [ngClass]="{disabled: !mainService.advertising}"></app-advertising-view>
+        </div>
+    </div>
+    <div [style.height]="footerHeight + 'px'" id="footer" class="tab-nav-bar" [ngClass]="{disabled: !mainService.displayNav}">
+        <div class="tab-nav-item score feedback-scale" (click)="onClickTabBar('score/weekly')" [ngClass]="mainService.tabActive == 'score' ? 'active' : ''">
+			<span>スコア</span>
+        </div>
+		<div class="tab-nav-item friend feedback-scale" (click)="onClickTabBar('friend')" [ngClass]="mainService.tabActive == 'friend' ? 'active' : ''">
+			<span>フレンド</span>
+        </div>
+		<div class="tab-nav-item ranking feedback-scale" (click)="onClickTabBar('ranking')" [ngClass]="mainService.tabActive == 'ranking' ? 'active' : ''">
+			<span>ランキング</span>
+        </div>
+        <!-- LuanDT Remove START
+		<div class="tab-nav-item news" (click)="onClickTabBar('news')" [ngClass]="mainService.tabActive == 'news' ? 'active' : ''">
+			<span>News</span>
+        </div>
+         -->
+         <!-- LuanDT Add START -->
+         <div class="tab-nav-item store feedback-scale" (click)="onClickTabBar('store')" [ngClass]="mainService.tabActive == 'store' ? 'active' : ''">
+            <span>店舗情報</span>
+        </div>
+        <!-- LuanDT Add END -->
+		<div class="tab-nav-item setting feedback-scale" (click)="onClickTabBar('my-page')" [ngClass]="mainService.tabActive == 'setting' ? 'active' : ''">
+			<span>マイページ</span>
+        </div>
+    </div>
+    <div id="loading" [class]="!mainService.loading ? 'disabled' : ''"></div>
+    <div id="no_connection_loading"  class="dialog-loading" [ngClass]="!mainService.getData('noconnection') ? 'disabled' : ''"></div>
+</div>
+
+<ng-template #dialogLoadingSimple let-dialogRef="dialogRef" let-ctx="dialogRef.context">
+    <div class="dialog-model">
+        <div class="dialog-loading">No internet connection</div>
+    </div>
+</ng-template>
+<ng-template #templateDialogNoConnection let-dialogRef="dialogRef" let-ctx="dialogRef.context">
+    <div class="dialog-model">
+        <div class="dialog-header">
+            インターネットに接続されていません。
+        </div>
+        <div class="dialog-content">
+            <div>必ずインターネットに接続してください。</div>
+        </div>
+    </div>
+    <div class="dialog-loading">
+        <div style="display: none;">Loading</div>
+    </div>
+</ng-template>

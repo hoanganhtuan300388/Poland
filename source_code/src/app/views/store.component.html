@@ -1,0 +1,38 @@
+<div 
+    #scrollList
+    class="wrap-store" 
+    [style.height]="listHeight + 'px'"
+    (scroll)="onScroll($event)"
+>
+    <div class="cities-list">
+        <div *ngIf="storeListService.cities?.length > 0;then citiesfind else citiesnull"></div>
+        <ng-template #citiesfind>
+            <div class="cities-list-item" *ngFor="let city of storeListService.cities; let i = index">
+                <div class="city-item-content">
+                    <div class="city-image"></div>
+                    <div class="city-name">{{city.name}}</div>
+                    <div class="city-show-stores feedback-scale" [ngClass]="{close: !city.isShowStore}" (click)="toogleListStore(i)">
+                    </div>
+                </div>
+                <div class="cities-stores-list" [ngClass]="{close: !city.isShowStore}">
+                    <div class="cities-stores-item" *ngFor="let store of city.stores">
+                        <div class="store-image">
+                            <img src="./assets/img/store-image.png" />
+                        </div>
+                        <div class="store-name">{{store.name}}</div>
+                        <div class="store-show-detail">
+                            <a (click)="viewDetail(store)" class="feedback-scale">
+                                <img src="./assets/img/arrow.png" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template #citiesnull>
+            <div class="data-not-found center">
+                店舗情報がありません。
+            </div>
+        </ng-template>
+    </div>
+</div>

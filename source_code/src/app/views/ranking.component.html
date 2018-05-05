@@ -1,0 +1,70 @@
+<div class="wrap-ranking">
+    <div class="tab three">
+        <ul>
+            <li class="feedback">
+                <a [class]="searchTypeAfter == 'club' ? 'active' : ''" (click)="search('club')">登録店舗</a>
+            </li>
+            <li class="feedback">
+                <a [class]="searchTypeAfter == 'city' ? 'active' : ''" (click)="search('city')">地域別</a>
+            </li>
+            <li class="feedback">
+                <a [class]="searchTypeAfter == 'national' ? 'active' : ''" (click)="search('national')">全国</a>
+            </li>
+        </ul>
+    </div>
+    <div [style.height]="wrapHeight + 'px'" class="wrap-ranking-list">
+        <div *ngIf="rankings?.length > 0;then rankingsfind else rankingsnull"></div>
+        <ng-template #rankingsfind>    
+            <div class="ranking-list-item" *ngFor="let ranking of rankings; let i = index">
+                <div class="info">
+                    <div class="place-name">
+                        {{i + 1}}位 {{ranking.nickname}}
+                    </div>
+                    <div class="hight-play">
+                        ハイスコア{{ranking.highest_score}} プレイ数{{ranking.game_no}}
+                    </div>
+                </div>
+                <div class="avatar">
+                    <img [src]="ranking.image != null ? ranking.image : './assets/img/avatar.png'" />
+                </div>
+                <div class="ranking-add-friend">
+                    <a (click)="addFriend(ranking.id)" id="friend_{{ ranking.id }}" *ngIf="!ranking.is_friend && !ranking.is_requested">
+                        <img class="feedback-scale" src="./assets/img/add.png" width="20px" height="18px" />
+                    </a>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template #rankingsnull>
+            <div class="data-not-found center">
+                ランキングがありません。
+            </div>
+        </ng-template>
+    </div>
+</div>
+<div class="wrap-modal-dialog" [ngClass]="{disabled: dialogDisabled}">
+    <div class="modal-dialog">
+        <form *ngIf="showForm" [formGroup]="searchRankingForm" (submit)="searchRanking()">
+            <div class="dialog-content center">
+                <br />
+                <p>{{dialogTitle}}</p>
+                <br />
+                <select class="select" id="choise" formControlName="choise">
+                    <option value="">--Select--</option>
+                    <option *ngFor="let item of choises" [value]="item.id">
+                        {{item.name}}
+                    </option>
+                </select>
+                <br />
+                <br />
+            </div>
+            <div class="dialog-button">
+                <button class="dialog-btn-choise-club">
+                    選択
+                </button>
+                <button class="dialog-btn-cancel" type="button" (click)="close()">
+                    キャンセル
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

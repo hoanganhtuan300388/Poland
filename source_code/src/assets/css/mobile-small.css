@@ -1,0 +1,90 @@
+/* Portrait */
+@media only screen 
+  and (device-width: 320px)
+  and (max-device-height: 568px)
+  and (orientation: portrait)
+  {
+	/* START game list*/
+	.list-data-header div, 
+	.list-data-body .list-data div {
+    	line-height: 30px;
+	}
+	/* END game list*/
+	
+	.switch-item {
+		height: 30px;
+	}
+	
+	.switch-item .link {
+		
+	}
+
+	.switch-item .link img {
+		width: 10px;
+		height: 10px;
+		margin-top: 8px;
+		margin-right: 10px;
+	}
+
+	.switch-item .label {
+    	font-size: 12px;
+	}
+	
+	.wrap-friend-top .item-data {
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+	
+	.ranking-list-item {
+		height: 60px;
+	}
+
+	.ranking-list-item .info {
+		font-size: 14px;
+	}
+
+	.wrap-my-page .switch-item .icon img {
+		width: 20px;
+		height: 17px;
+	}
+
+	.wrap-setting .switch-item {
+		height: 40px;
+	}
+
+	.wrap-setting .switch-item .label {
+		font-size: 14px;
+	}
+
+	.block-score-add {
+		height: 219px;
+	}
+
+	.block-score-add .category li {
+		height: 43px;
+	}
+
+	.block-title {
+		margin-top: 8px;
+		margin-right: 8px;
+	}
+
+	.block .table-cell {
+		font-size: 21px;
+	}
+
+	.score-table .frame .table span {
+		font-size: 16px;
+	}
+
+	.score-table .frame .row1 span, .score-table .frame .row2 span {
+		font-size: 16px;
+	}
+
+	.right button {
+		height: 26px;
+		width: 42px;
+		border-radius: 4px;
+		font-size: 12px;
+	}
+}

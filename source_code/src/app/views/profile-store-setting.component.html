@@ -1,0 +1,30 @@
+<div class="wrap-profile-store">
+    <form [formGroup]="profileStoreForm" (submit)="choiseProfileStore()">
+        <div class="wrap-item-form">
+            <div class="wrap-label">
+                <label for="city">都道府県</label>
+            </div>
+            <div class="wrap-input">
+                <select id="city" class="select" formControlName="city" (change)="choiseCity($event)">
+                    <option *ngFor="let city of cities" [value]="city.id">
+                        {{city.name}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="wrap-item-form">
+            <div class="wrap-label">
+                <label for="stores">店舗名</label>
+            </div>
+            <div class="wrap-input">
+                <select id="store" class="select" formControlName="store" (change)="choiseStore()">
+                    <option value="undefined" disabled selected hidden></option>
+                    <option value="null" disabled selected hidden></option>
+                    <option *ngFor="let store of stores" [disabled]="store.isChoise" [ngValue]="store">
+                        {{store.name}}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>

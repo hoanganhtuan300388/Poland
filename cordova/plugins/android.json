@@ -1,0 +1,55 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.gmorunsystem.poland"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.gmorunsystem.poland"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.gmorunsystem.poland"
+    },
+    "cordova-plugin-facebook4": {
+      "APP_ID": "139532123311808",
+      "APP_NAME": "billad",
+      "PACKAGE_NAME": "com.gmorunsystem.poland"
+    },
+    "twitter-connect-plugin": {
+      "FABRIC_KEY": "bR3JLguVMcSzDVVC5R8P246Qs",
+      "PACKAGE_NAME": "com.gmorunsystem.poland"
+    },
+    "cordova-plugin-fcm": {
+      "PACKAGE_NAME": "com.gmorunsystem.poland"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.gmorunsystem.poland"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.gmorunsystem.poland"
+    },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "com.gmorunsystem.poland"
+    },
+    "ionic-plugin-keyboard": {
+      "PACKAGE_NAME": "com.gmorunsystem.poland"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.gmorunsystem.poland"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.gmorunsystem.poland"
+    }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-compat": {
+      "PACKAGE_NAME": "com.gmorunsystem.poland"
+    }
+  }
+}

@@ -1,0 +1,158 @@
+<div class="wrapper app-score-add-view">
+    <div class="block">
+        <div class="category">
+            <div class="block-title">
+                <div class="subtitle">{{gameService.startTime | date: 'yyyy/MM/dd H:m'}}</div>
+                <div class="subtitle-rigth">{{gameService.getClubName()}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="score-table">
+        <div class="score-content">
+            <ul class="score-table">
+                <li *ngFor="let frame of gameService.getFrameGroup(1);let idx=index">
+                    <div class="frame frame{{ idx }}" [class.active]="currentFrame && frame.id === currentFrame.id">
+                        <div class="row1 center" [ngStyle]="changeAttribute('height-row', idx)">
+                            <span class="center">{{ frame.id }}</span>
+                        </div>
+                        <div class="row2 center" [ngStyle]="changeAttribute('height-row', idx)">
+                            <div class="round1" [ngStyle]="changeAttribute('round', idx)">
+
+                                <div class="table floatL" *ngIf="frame.getStrike()">
+                                    <span class="floatL triangle-right" [ngStyle]="changeAttribute('triangle-right', idx)"></span>
+                                    <span class="floatL triangle-left" [ngStyle]="changeAttribute('triangle-left', idx)"></span>
+                                </div>
+                                <span class="center" *ngIf="!frame.getStrike()">{{frame.getDisplayScore(0)}}</span>
+
+                            </div>
+                            <div class="round2 border-left border-bottom" [ngStyle]="changeAttribute('round', idx)">
+                                <div *ngIf="frame.getSpare()" class="triangle-bottomright" [ngStyle]="changeAttribute('triangle-bottomright', idx)" ></div>
+                                <span class="center" *ngIf="!frame.getSpare()">{{frame.getDisplayScore(1)}}</span>
+                            </div>
+                        </div>
+                        <div class="row3 center" [ngStyle]="changeAttribute('height-row', idx)">
+                            <div class="table">
+                                <span class="center">{{ frame.getDisplayTotal() }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="score-table">
+                <li *ngFor="let frame of gameService.getFrameGroup(2);let idx=index">
+                    <div class="frame frame{{ idx }}" [class.active]="currentFrame && frame.id === currentFrame.id">
+                        <div class="row1 center" [ngStyle]="changeAttribute('height-row', idx, 2)">
+                            <span class="center">{{ frame.id }}</span>
+                        </div>
+                        <div *ngIf="frame.id != 10"  class="row2 center" [ngStyle]="changeAttribute('height-row', idx, 2)">
+                            <div class="round1" [ngStyle]="changeAttribute('round', idx, 2)">
+
+                                <div class="table floatL" *ngIf="frame.getStrike()">
+                                    <span class="floatL triangle-right" [ngStyle]="changeAttribute('triangle-right', idx, 2, frame.id)"></span>
+                                    <span class="floatL triangle-left" [ngStyle]="changeAttribute('triangle-left', idx, 2, frame.id)"></span>
+                                </div>
+                                <span class="center" *ngIf="!frame.getStrike()">{{frame.getDisplayScore(0)}}</span>
+
+                            </div>
+                            <div class="round2 border-left border-bottom" [ngStyle]="changeAttribute('round', idx, 2)">
+								<div *ngIf="frame.getSpare()" class="triangle-bottomright" [ngStyle]="changeAttribute('triangle-bottomright', idx, 2, frame.id)" ></div>
+                                <span class="center" *ngIf="!frame.getSpare()">{{frame.getDisplayScore(1)}}</span>
+                            </div>
+                        </div>
+                        <div *ngIf="frame.id == 10"  class="row2 center" [ngStyle]="changeAttribute('height-row', idx, 2)">
+                            <div class="round1" [ngStyle]="changeAttribute('round', idx, 2)">
+
+                                <div class="table floatL" *ngIf="frame.isStrike(0)">
+                                    <span class="floatL triangle-right" [ngStyle]="changeAttribute('triangle-right', idx, 2, frame.id)"></span>
+                                    <span class="floatL triangle-left" [ngStyle]="changeAttribute('triangle-left', idx, 2, frame.id)"></span>
+                                </div>
+                                <span class="center" *ngIf="!frame.isStrike(0)">{{frame.getDisplayScore(0)}}</span>
+
+                            </div>
+                            <div class="round2 border-left border-bottom" [ngStyle]="changeAttribute('round', idx, 2)">
+                                <div class="table floatL" *ngIf="frame.isStrike(1)">
+                                    <span class="floatL triangle-right" [ngStyle]="changeAttribute('triangle-right', idx, 2, frame.id)"></span>
+                                    <span class="floatL triangle-left" [ngStyle]="changeAttribute('triangle-left', idx, 2, frame.id)"></span>
+                                </div>
+
+                                <div *ngIf="frame.isSpare(1)" class="triangle-bottomright" [ngStyle]="changeAttribute('triangle-bottomright', idx, 2, frame.id)" ></div>
+                                <span class="center" *ngIf="!frame.isSpare(1) && !frame.isStrike(1)">{{frame.getDisplayScore(1)}}</span>
+
+                            </div>
+                            <div class="round3 border-left border-bottom" [ngStyle]="changeAttribute('round', idx, 2)">
+                                <div class="table floatL" *ngIf="frame.isStrike(2)">
+                                    <span class="floatL triangle-right" [ngStyle]="changeAttribute('triangle-right', idx, 2, frame.id)"></span>
+                                    <span class="floatL triangle-left" [ngStyle]="changeAttribute('triangle-left', idx, 2, frame.id)"></span>
+                                </div>
+
+                                <div *ngIf="frame.isSpare(2)" class="triangle-bottomright" [ngStyle]="changeAttribute('triangle-bottomright', idx, 2, frame.id)" ></div>
+                                <span class="center" *ngIf="!frame.isSpare(2) && !frame.isStrike(2)">{{frame.getDisplayScore(2)}}</span>
+
+                            </div>
+                        </div>
+                        <div class="row3 center" [ngStyle]="changeAttribute('height-row', idx, 2)">
+                            <div class="table">
+                                <span class="center">{{ frame.getDisplayTotal() }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <ng-template #scoreStrike >
+        <div class="triangle-bottomright"></div>
+    </ng-template>
+
+    <ng-template #scoreSpare>
+        <div class="table floatL round1">
+            <span class="floatL triangle-right"></span>
+            <span class="floatL triangle-left"></span>
+        </div>
+    </ng-template>
+
+    <ng-template #frameRound3>
+        <div class="round3 border-left border-bottom">
+
+        </div>
+    </ng-template>
+
+    <div class="block block-score-add">
+        <div class="category table-input">
+            <ul>
+                <li *ngFor="let col of tableInput.getTable();let idx=index" class="block-rơw row{{idx}}" [class.feedback]="col.isEnable()" [class.ui-disabled]="!col.isEnable()">
+                    <!--<div *ngFor="let col of tableRow;let idx1=index" class="block-item" [class.enabled]="col.isEnable()">-->
+                        <div *ngIf="col.isEnable()" (click)="onChangeScore(col.getValue())" class="block-item-content">
+                            <div class="table center">
+                                <div *ngIf="col.isStrike()" class="table-cell center">
+                                    <span class="floatL triangle-right" [ngStyle]="changeAttribute('triangle-right')"></span>
+                                    <span class="floatL triangle-left" [ngStyle]="changeAttribute('triangle-left')"></span>
+                                </div>
+                                <div *ngIf="col.isSpare()" class="table-cell center">
+                                    <span class="floatL triangle-bottomright" [ngStyle]="changeInputAttribute('triangle-bottomright', 40)"></span>
+                                </div>
+                                <div *ngIf="col.getValue() != 'STRIKE'" class="table-cell center">
+                                    {{col.getValue()}}
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="!col.isEnable()" class="block-item-content">
+                            <div class="table center">
+                                <div *ngIf="col.getValue()=='STRIKE'" class="table-cell center">
+                                    <span class="floatL triangle-right" [ngStyle]="changeAttribute('triangle-right')"></span>
+                                    <span class="floatL triangle-left" [ngStyle]="changeAttribute('triangle-left')"></span>
+                                </div>
+                                <div *ngIf="col.getValue() != 'STRIKE'" class="table-cell center">
+                                    {{col.getValue()}}
+                                </div>
+                            </div>
+                        </div>
+                    <!--</div>-->
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

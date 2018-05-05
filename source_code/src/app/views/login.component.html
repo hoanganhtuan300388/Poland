@@ -1,0 +1,41 @@
+<div class="wrap-login">
+    <form [formGroup]="loginForm" (submit)="processSubmit()">
+        <div class="form-group">
+            <div class="form-item" [ngClass]="{error: loginForm.get('email').touched && !loginForm.get('email').valid}">
+                <label>メール : </label>
+                <div class="form-input">
+                    <input type="email" id="email" formControlName="email" autocorrect="off" autocapitalize="none" />
+                </div>
+            </div>
+            <div class="form-item" [ngClass]="{error: loginForm.get('password').touched && !loginForm.get('password').valid}">
+                <label>パスワード : </label>
+                <div class="form-input">
+                    <input type="password" id="password" formControlName="password" />
+                </div>
+            </div>
+            <div style="margin-top: 10px">
+                <button class="btn btn-blue feedback" value="login" (click)="setTypeSubmit('login')" [disabled]="!loginForm.valid">
+                    ログイン
+                </button>
+            </div>
+        </div>
+        <div class="wrap-link-forgotpass">
+            <button class="link-blue feedback-scale" value="forgotpass" (click)="setTypeSubmit('forgotpass')">
+                パスワードを忘れた方はこちら
+            </button>
+        </div>
+    </form>
+
+    <div class="wrap-link-socical">
+        <a href="javascript:void(0)" (click)="loginSocical('facebook')">
+            <img src="./assets/img/fb.png" width="60px" height="60px" class="feedback"/>
+        </a> &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="javascript:void(0)" (click)="loginSocical('twitter')">
+            <img src="./assets/img/twit.png" width="60px" height="60px" class="feedback-scale"/>
+        </a>
+        <!--<p><a href="javascript:void(0)" (click)="logoutFacebook()">Logout</a></p>-->
+    </div>
+    <div style="margin-top: 70px">
+        <button class="btn btn-green feedback" (click)="redirectSingup()">新規登録</button>
+    </div>
+</div>

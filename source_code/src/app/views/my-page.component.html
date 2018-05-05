@@ -1,0 +1,85 @@
+<div class="wrap-my-page" [style.height]="listHeight + 'px'">
+    <div class="wrap-profile-img">
+        <img [src]="userLogged.image ? userLogged.image : './assets/img/avatar.png'" />
+        <div class="level">
+            <div class="title">
+                現在のスキルレベル
+            </div>
+            {{userLogged.level}}
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-item">
+            <label>コメント : </label>
+            <div class="form-input">
+                <input type="text" id="comment" value="{{userLogged.comment}}" readonly="true" />
+            </div>
+        </div>
+        <div class="form-item">
+            <label>使用キュー : </label>
+            <div class="form-input">
+                <input type="text" id="usetxt" value="{{userLogged.usetxt}}" readonly="true" />
+            </div>
+        </div>
+        <div class="wrap-stores-list">
+            <div class="label-list">
+                <label>よく行く店を選択</label>
+            </div>
+            <div *ngIf="userLogged.clubs?.length > 0;then storefind else storenull"></div>
+            <ng-template #storefind>
+                <div class="stores-list">
+                    <div class="stores-list-item" *ngFor="let store of userLogged.clubs">
+                        {{store.name}}
+                        <div class="btn-delete-club feedback-scale" (click)="deleteStore(store)"></div>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template #storenull>
+                <div class="stores-list">
+                    <div class="stores-not-found">
+                        よく行く店がありません。
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+    <div class="switch-group">
+        <!-- LuanDT Remove START
+        <div class="switch-item">
+            <div class="icon"><img src="./assets/img/my-page-store.png" /></div>
+            <div class="label">店舗情報</div>
+            <div class="link">
+                <a [routerLink]="['/store']"><img src="./assets/img/arrow.png" /></a>
+            </div>
+        </div> -->
+        
+        <!-- <div class="switch-item">
+            <div class="icon"><img src="./assets/img/my-page-infomation.png" /></div>
+            <div class="label">ビリヤード協会情報</div>
+            <div class="link">
+                <a [routerLink]="['/infomation']"><img src="./assets/img/arrow.png" /></a>
+            </div>
+        </div> -->
+        <div class="switch-item">
+            <div class="icon"><img src="./assets/img/my-page-setting.png" /></div>
+            <div class="label">設定</div>
+            <div class="link">
+                <a [routerLink]="['/setting']"><img src="./assets/img/arrow.png" class="feedback-scale" /></a>
+            </div>
+        </div>
+        <div class="switch-item">
+            <div class="icon"><img src="./assets/img/my-page-terms.png" /></div>
+            <div class="label">利用規約</div>
+            <div class="link">
+                <a [routerLink]="['/policy']"><img src="./assets/img/arrow.png" class="feedback-scale"/></a>
+            </div>
+        </div>
+        <div class="switch-item">
+            <div class="icon"><img src="./assets/img/my-page-logout.png" class="feedback-scale"/></div>
+            <div class="label">ログアウト</div>
+            <div class="link">
+                <a (click)="logout()"><img src="./assets/img/arrow.png" class="feedback-scale" /></a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="wrap-profile">
+    <form [formGroup]="profileForm" (submit)="updateProfile()">
+        <div class="wrap-profile-img">
+            <img [src]="profileImageUrl" (click)="changeAvatar()" class="feedback" />
+        </div>
+        <div class="form-group">
+            <div class="form-item" [ngClass]="{error: profileForm.get('nickname').touched && !profileForm.get('nickname').valid}">
+                <label>ニックネーム : </label>
+                <div class="form-input">
+                    <input type="text" id="nickname" formControlName="nickname" />
+                </div>
+            </div>
+            <div class="form-item" [ngClass]="{error: profileForm.get('comment').touched && !profileForm.get('comment').valid}">
+                <label>コメント : </label>
+                <div class="form-input">
+                    <input type="text" id="comment" formControlName="comment" autocorrect="off" autocapitalize="none" maxlength="140" />
+                </div>
+            </div>
+            <div class="form-item">
+                <label>使用キュー : </label>
+                <div class="form-input">
+                    <input type="text" id="usetxt" formControlName="usetxt" autocorrect="off" autocapitalize="none" maxlength="140" />
+                </div>
+            </div>
+            <div class="wrap-stores-list">
+                <div class="label-list">
+                    <label>よく行く店を選択</label>
+                    <a [ngClass]="stores.length >= 10 ? 'disabled' : ''" (click)="redirectProfileStore()"><img class="feedback-scale" src="./assets/img/add.png" /></a>
+                </div>
+                <div *ngIf="stores?.length > 0;then storefind else storenull"></div>
+                <ng-template #storefind>
+                    <div class="stores-list">
+                        <div class="stores-list-item" *ngFor="let store of stores">
+                            {{store.name}}
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template #storenull>
+                    <div class="stores-list">
+                        <div class="stores-not-found">
+                            よく行く店がありません。
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+            <div style="margin-top: 10px" [ngClass]="{disabled: isChangeAvatar}">
+                <button class="btn btn-blue feedback" [disabled]="!profileForm.valid">
+                    編集
+                </button>
+            </div>  
+        </div>
+        <div class="pro-avatar-actions-wrap" [ngClass]="{disabled: !isChangeAvatar}">
+            <ul>
+                <li class="feedback" ><a (click)="choiseImageFrom('camera')">カメラで撮る</a></li>
+                <li class="feedback" ><a (click)="choiseImageFrom('album')">アルバムから読み込む</a></li>
+                <li class="feedback" ><a (click)="cancelChangeAvatar()">キャンセル</a></li>
+            </ul>
+        </div>
+    </form>
+</div>

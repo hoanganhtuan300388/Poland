@@ -1,0 +1,56 @@
+{
+    "name": "com.gmorunsystem.poland",
+    "displayName": "Poland",
+    "version": "1.0.0",
+    "description": "A sample Apache Cordova application that responds to the deviceready event.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Apache Cordova Team",
+    "license": "Apache-2.0",
+    "dependencies": {
+        "cordova-android": "^6.2.3",
+        "cordova-ios": "^4.4.0",
+        "cordova-plugin-camera": "^2.4.1",
+        "cordova-plugin-compat": "^1.1.0",
+        "cordova-plugin-device": "^1.1.6",
+        "cordova-plugin-facebook4": "^1.9.1",
+        "cordova-plugin-fcm": "^2.1.2",
+        "cordova-plugin-file": "^4.3.3",
+        "cordova-plugin-file-transfer": "^1.6.3",
+        "cordova-plugin-geolocation": "^2.4.3",
+        "cordova-plugin-network-information": "^1.3.3",
+        "cordova-plugin-statusbar": "^2.2.3",
+        "cordova-plugin-whitelist": "^1.3.2",
+        "ionic-plugin-keyboard": "^2.2.1",
+        "twitter-connect-plugin": "^0.6.0"
+    },
+    "cordova": {
+        "plugins": {
+            "cordova-plugin-whitelist": {},
+            "cordova-plugin-device": {},
+            "cordova-plugin-camera": {},
+            "cordova-plugin-facebook4": {
+                "APP_ID": "139532123311808",
+                "APP_NAME": "billad"
+            },
+            "twitter-connect-plugin": {
+                "FABRIC_KEY": "bR3JLguVMcSzDVVC5R8P246Qs"
+            },
+            "cordova-plugin-fcm": {},
+            "cordova-plugin-network-information": {},
+            "cordova-plugin-file": {},
+            "cordova-plugin-file-transfer": {},
+            "ionic-plugin-keyboard": {},
+            "cordova-plugin-geolocation": {
+                "GEOLOCATION_USAGE_DESCRIPTION": "[App Name] would like to access your location when running and displayed."
+            },
+            "cordova-plugin-statusbar": {}
+        },
+        "platforms": [
+            "android",
+            "ios"
+        ]
+    }
+}

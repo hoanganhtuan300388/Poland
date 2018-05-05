@@ -1,0 +1,32 @@
+<div class="wrap-setting">
+    <form *ngIf="showForm" [formGroup]="settingStateForm" (submit)="settingState()">
+        <div class="switch-group">
+            <!-- LuanDT Remove START
+            <div class="switch-item">
+                <div class="icon"><img src="./assets/img/push.png" /></div>
+                <div class="label">通知</div>
+                <div class="control">
+                    <input type="checkbox" id="is-push-notification" formControlName="isPushNotification" />
+                    <label for="is-push-notification" class="lbl-switch">Toggle</label>
+                </div>
+            </div>
+             -->
+            <div class="switch-item">
+                <div class="icon"><img src="./assets/img/add-friend.png" /></div>
+                <div class="label">フレンド登録</div>
+                <div class="control">
+                    <input type="checkbox" id="is-add-friend" formControlName="isAddFriend" />
+                    <label for="is-add-friend" class="lbl-switch">Toggle</label>
+                </div>
+            </div>
+            <div class="switch-item">
+                <div class="icon"><img src="./assets/img/map.png" /></div>
+                <div class="label">マップ表示（位置情報）</div>
+                <div class="control">
+                    <input type="checkbox" id="is-view-map" formControlName="isViewMap" />
+                    <label for="is-view-map" class="lbl-switch">Toggle</label>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

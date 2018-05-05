@@ -1,0 +1,34 @@
+<div class="wrap-signup">
+    <form [formGroup]="signupForm" (submit)="signupUsually()">
+        <div class="form-group">
+            <div class="form-item" [ngClass]="{error: signupForm.get('email').touched && !signupForm.get('email').valid}">
+                <label>メールアドレス : </label>
+                <div class="form-input">
+                    <input type="email" id="email" formControlName="email" autocorrect="off" autocapitalize="none" />
+                </div>
+            </div>
+            <div class="form-item" [ngClass]="{error: signupForm.get('password').touched && !signupForm.get('password').valid}">
+                <label>パスワード : </label>
+                <div class="form-input">
+                    <input type="password" id="password" formControlName="password" />
+                </div>
+            </div>
+            <div style="margin-top: 10px">
+                <button class="btn btn-blue feedback" [disabled]="!signupForm.valid">
+                    登録
+                </button>
+            </div>
+        </div>
+    </form>
+    <div class="wrap-link-socical">
+        <div class="lbl-following-account">
+            次のアカウントをお持ちの場合：
+        </div>
+        <a href="javascript:void(0)" (click)="signupSocical('facebook')">
+            <img src="./assets/img/fb.png" width="60px" height="60px" class="feedback"/>
+        </a> &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="javascript:void(0)" (click)="signupSocical('twitter')">
+            <img src="./assets/img/twit.png" width="60px" height="60px" class="feedback-scale" />
+        </a>
+    </div>
+</div>

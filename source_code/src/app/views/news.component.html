@@ -1,0 +1,30 @@
+<div 
+    #scrollList
+    class="wrap-news"
+    [style.height]="listHeight + 'px'"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollUpDistance]="1.5"
+    [infiniteScrollThrottle]="100"
+    (scroll)="onScroll($event)"
+    (scrolled)="onScrollDown()"
+    (scrolledUp)="onScrollUp()"
+    [scrollWindow]="false"
+>
+    <div class="list-news">
+        <div *ngIf="newsListService.news?.length > 0;then newsfind else newsnull"></div>
+        <ng-template #newsfind>
+            <div class="news-item" *ngFor="let new of newsListService.news">
+                <div class="left">{{new.title}}</div>
+                <div class="right">
+                    <a (click)="viewDetail(new)"><br /></a>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template #newsnull>
+            <div class="data-not-found center">
+                NEWSがありません。
+            </div>
+        </ng-template>
+    </div>
+</div>

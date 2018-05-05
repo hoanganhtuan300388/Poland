@@ -1,0 +1,57 @@
+<div 
+    #scrollList
+    class="wrap-friend-top"
+    [style.height]="listHeight + 'px'"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollUpDistance]="1.5"
+    [infiniteScrollThrottle]="100"
+    (scroll)="onScroll($event)"
+    (scrolled)="onScrollDown()"
+    (scrolledUp)="onScrollUp()"
+    [scrollWindow]="false"
+>
+    <div class="list-data">
+        <div *ngIf="friendListService.friends?.length > 0;then friendsfind else friendsnull"></div>
+        <ng-template #friendsfind>
+            <div class="item-data" *ngFor="let friend of friendListService.friends">
+                <div class="left">
+                    <div class="friend-avatar">
+                        <img [src]="friend.image != null ? friend.image : './assets/img/avatar.png'" width="45px" height="45px" />
+                    </div>
+                    <div class="friend-info">
+                        <div class="name">{{friend.nickname}}</div>
+                        <div class="comment">{{friend.comment}}</div>
+                    </div>
+                </div>
+                <div *ngIf="friend && friend.status === 1;then friendAccess else friendDeaccess"></div>
+                <ng-template #friendAccess>
+                    <div class="right">
+                        <div class="right friend-new" [ngClass]="friend.message_flag == 0 ? 'disabled' : ''">
+                            <img class="feedback" src="./assets/img/new-message.png" width="24px" height="24px" />
+                        </div>
+                        <div class="right delete-friend" (click)="deleteFriend(friend)">
+                            <img class="feedback-scale" src="./assets/img/delete-item.png" width="21px" height="21px" />
+                        </div>
+                        <div class="right goto-chat" (click)="gotoChat(friend)">
+                            <img class="feedback-scale" src="./assets/img/inbox.png" width="20px" height="18px" />
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template #friendDeaccess>
+                    <div class="right">
+                        <button class="btn-access feedback" (click)="accessFriend(friend)">承認</button>
+                    </div>
+                    <div class="right">
+                        <button class="btn-denied feedback" (click)="deniedFriend(friend)">非承認</button>
+                    </div>
+                </ng-template>
+            </div>
+        </ng-template>
+        <ng-template #friendsnull>
+            <div class="data-not-found center" style="padding-top: 10px;">
+                フレンドがありません。
+            </div>
+        </ng-template>
+    </div>
+</div>

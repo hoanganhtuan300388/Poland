@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "702484809342",
+    "firebase_url": "https://poland-app-aa4b3.firebaseio.com",
+    "project_id": "poland-app-aa4b3",
+    "storage_bucket": "poland-app-aa4b3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:702484809342:android:a2788222ce31ffcc",
+        "android_client_info": {
+          "package_name": "com.gmorunsystem.poland"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "702484809342-bgsnucqfsvb3lc4il1hte0dojej2oh4v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJIM-6oIX85QsapTglunAD765ZVu5F6gA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

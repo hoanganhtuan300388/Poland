@@ -1,0 +1,54 @@
+<div class="wrap-friend-search" [style.height]="listHeight + 'px'">
+    <div class="list-data">
+        <div *ngIf="users?.length > 0;then usersfind else usersnull"></div>
+        <ng-template #usersfind>
+            <div class="item-data" *ngFor="let user of users">
+                <div class="left">
+                    <div class="friend-avatar">
+                        <img [src]="user.image != null ? user.image : './assets/img/avatar.png'" width="45px" height="45px" />
+                    </div>
+                    <div class="friend-info">
+                        <div class="name">{{user.nickname}}</div>
+                        <div class="comment">{{user.comment}}</div>
+                    </div>
+                </div>
+                <div class="right">
+                    <a (click)="addFriend(user.id)">
+                        <img class="feedback" src="./assets/img/add.png" width="20px" height="18px" />
+                    </a>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template #usersnull>
+            <div class="data-not-found center">
+                フレンドがありません。
+            </div>
+        </ng-template>
+    </div>
+</div>
+<div class="wrap-modal-dialog" [ngClass]="{disabled: dialogDisabled}">
+    <div class="modal-dialog">
+        <form (ngSubmit)="searchFriend(searchFriendForm)" #searchFriendForm="ngForm">
+            <div class="dialog-content center">
+                <br />
+                <br />
+                <div class="radio-wrap" *ngFor="let searchOption of searchOptions">
+                    <label>
+                        <input type="radio" name="typeSearch" [ngModel]="typeSearch" [value]="searchOption.value"> {{searchOption.label}}
+                    </label>
+                    <br />
+                    <br />
+                </div>
+                <br />
+            </div>
+            <div class="dialog-button">
+                <button class="dialog-btn-cancel-en" (click)="closeDialog()" type="button">
+                    Cancel
+                </button>
+                <button class="dialog-btn-ok" type="submit">
+                    絞込
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

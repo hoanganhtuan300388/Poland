@@ -1,0 +1,124 @@
+<div class="wrapper app-score-detail-view">
+    <div
+            class="scrolled ngx-scroller"
+			[style.height]="listHeight + 'px'"
+			infiniteScroll
+			[infiniteScrollDistance]="scroller.infiniteScrollDistance"
+			[infiniteScrollThrottle]="scroller.infiniteScrollThrottle"
+			(scrolled)="onScrollDown()"
+			(scrolledUp)="onScrollUp()"
+			[scrollWindow]="scroller.scrollWindow"
+    >
+        <div *ngIf="items?.length > 0" class="scrolled-data">
+            <div class="list-data" *ngFor="let item of items">
+                <div class="block">
+                    <div class="category">
+                        <div class="block-title">
+                            <div class="subtitle">{{this.dateFormat(item.started_at, 'YYYY/MM/DD h:mm')}}スタート</div>
+                            <div class="subtitle-rigth">{{item.club.name}}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="score-table">
+                    <div class="score-content">
+                        <ul class="score-table">
+                            <li *ngFor="let frame of item.data;let idx=index">
+                                <div class="frame frame{{ idx }}">
+                                    <div class="row1 center" [ngStyle]="changeAttribute('height-row', idx)">
+                                        <span class="center">{{ frame.id }}</span>
+                                    </div>
+                                    <div *ngIf="frame.id != 10" class="row2 center" [ngStyle]="changeAttribute('height-row', idx)">
+                                        <div class="round1" [ngStyle]="changeAttribute('round', idx)">
+
+                                            <div class="table floatL" *ngIf="frame.strike">
+                                                <span class="floatL triangle-right" [ngStyle]="changeAttribute('triangle-right', idx)"></span>
+                                                <span class="floatL triangle-left" [ngStyle]="changeAttribute('triangle-left', idx)"></span>
+                                            </div>
+                                            <span class="center" *ngIf="!frame.strike">{{this.getDisplayScore(frame, 0)}}</span>
+
+                                        </div>
+                                        <div class="round2 border-left border-bottom" [ngStyle]="changeAttribute('round', idx)">
+                                            <div *ngIf="frame.spare" class="triangle-bottomright" [ngStyle]="changeAttribute('triangle-bottomright', idx)" ></div>
+                                            <span class="center" *ngIf="!frame.spare">{{this.getDisplayScore(frame, 1)}}</span>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="frame.id == 10" class="row2 center" [ngStyle]="changeAttribute('height-row', idx)">
+                                        <div class="round1" [ngStyle]="changeAttribute('round', idx)">
+
+                                            <div class="table floatL is-strike" *ngIf="this.isStrike(frame, 0)">
+                                                <span class="floatL triangle-right" [ngStyle]="changeAttribute('triangle-right', 0, frame)"></span>
+                                                <span class="floatL triangle-left" [ngStyle]="changeAttribute('triangle-left', 0, frame)"></span>
+                                            </div>
+                                            <span class="center" *ngIf="!this.isStrike(frame, 0)">{{this.getDisplayScore(frame, 0)}}</span>
+
+                                        </div>
+                                        <div class="round2 border-left border-bottom" [ngStyle]="changeAttribute('round', 1, frame)">
+
+                                            <div class="table floatL is-strike" *ngIf="this.isStrike(frame, 1)">
+                                                <span class="floatL triangle-right" [ngStyle]="changeAttribute('triangle-right', 1, frame)"></span>
+                                                <span class="floatL triangle-left" [ngStyle]="changeAttribute('triangle-left', 1, frame)"></span>
+                                            </div>
+
+                                            <div *ngIf="this.isSpare(frame, 1)" class="triangle-bottomright" [ngStyle]="changeAttribute('triangle-bottomright', idx)" ></div>
+                                            <span class="center" *ngIf="!this.isStrike(frame, 1) && !this.isSpare(frame, 1)">{{this.getDisplayScore(frame, 1)}}</span>
+                                        </div>
+                                        <div class="round3 border-left border-bottom" [ngStyle]="changeAttribute('round', 2, frame)">
+                                            <div class="table floatL is-strike" *ngIf="this.isStrike(frame, 2)">
+                                                <span class="floatL triangle-right" [ngStyle]="changeAttribute('triangle-right', 2, frame)"></span>
+                                                <span class="floatL triangle-left" [ngStyle]="changeAttribute('triangle-left', 2, frame)"></span>
+                                            </div>
+
+                                            <div *ngIf="this.isSpare(frame, 2)" class="triangle-bottomright" [ngStyle]="changeAttribute('triangle-bottomright', idx)" ></div>
+                                            <span class="center" *ngIf="!this.isStrike(frame, 2) && !this.isSpare(frame, 2)">{{this.getDisplayScore(frame, 2)}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row3 center" [ngStyle]="changeAttribute('height-row', idx)">
+                                        <div class="table">
+                                            <span class="center">{{ frame.total }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+
+                <div class="block">
+                    <div class="category">
+                        <ul>
+                            <li class="block-item row-border-bottom">
+                                <div class="block-item-content"><span>ゲーム時間</span> {{item.total_time ? item.total_time : 0}}分</div>
+                            </li>
+                            <li class="block-item row-border-bottom">
+                                <div class="block-item-content"><span>ストライク</span> {{item.total_strike ? item.total_strike : 0}}</div>
+                            </li>
+                            <li class="block-item row-border-bottom">
+                                <div class="block-item-content"><span>スペア</span> {{item.total_spare ? item.total_spare : 0}}</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #scoreStrike >
+        <div class="triangle-bottomright"></div>
+    </ng-template>
+
+    <ng-template #scoreSpare>
+        <div class="table floatL round1">
+            <span class="floatL triangle-right"></span>
+            <span class="floatL triangle-left"></span>
+        </div>
+    </ng-template>
+
+    <ng-template #frameRound3>
+        <div class="round3 border-left border-bottom">
+
+        </div>
+    </ng-template>
+
+</div>
